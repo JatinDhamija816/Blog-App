@@ -53,9 +53,6 @@ const userSchema = new Schema(
         ref: "Blog",
       },
     ],
-    refreshToken: {
-      type: String,
-    },
   },
   { timestamps: true }
 );
