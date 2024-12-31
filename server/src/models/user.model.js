@@ -47,6 +47,12 @@ const userSchema = new Schema(
         ref: "Blog",
       },
     ],
+    savedBlogs: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Blog",
+      },
+    ],
     refreshToken: {
       type: String,
     },
