@@ -4,12 +4,28 @@ import User from "../../models/user.model.js";
 import uploadOnCloudinary from "../../utils/cloudinary.js";
 import generateUsername from "../../utils/usernameGenerator.js";
 import ApiResponse from "../../utils/ApiResponse.js";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "../../config/constants.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   if ([name, email, password].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
+  }
+
+  if (!EMAIL_REGEX.test(sanitizedEmail)) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid email format.",
+    });
+  }
+
+  if (!PASSWORD_REGEX.test(sanitizedPassword)) {
+    return res.status(400).json({
+      success: false,
+      message:
+        "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.",
+    });
   }
 
   const username = await generateUsername(name);
@@ -19,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "User with this email already exists");
   }
 
-  const avatarLocalPath = req.files?.avatar?.[0]?.path;
+  const avatarLocalPath = req.file?.path;
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is required");
   }
