@@ -8,3 +8,5 @@ class ApiResponse {
     this.metadata = metadata;
   }
 }
+
+export default ApiResponse;
