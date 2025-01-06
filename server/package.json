@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "blogify (blog app) server",
+  "description": "(blog app) server",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
