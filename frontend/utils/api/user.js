@@ -7,10 +7,20 @@ export const register = async (userData) => {
     const res = await axios.post(`${SERVER_URL}/users/register`, userData, {
       withCredentials: true,
     });
-
     return res.data;
   } catch (error) {
-    return error;
+    if (error.response) {
+      return {
+        success: false,
+        message: error.response.data.message,
+        errors: error.response.data.errors || [],
+      };
+    } else {
+      return {
+        success: false,
+        message: "Something went wrong. Please try again.",
+      };
+    }
   }
 };
 

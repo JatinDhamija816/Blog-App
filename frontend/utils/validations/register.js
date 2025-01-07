@@ -1,9 +1,12 @@
-import { EMAIL_REGEX, MAX_NAME_LENGTH } from "../../constants";
-import { passwordValidate } from "./password";
+import {
+  EMAIL_REGEX,
+  MAX_NAME_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MIN_PASSWORD_LENGTH,
+  PASSWORD_REGEX,
+} from "../../constants";
 
-export const registerValidate = (user) => {
-  const errors = [];
-
+export default function registerValidate(user) {
   const {
     name = "",
     email = "",
@@ -17,25 +20,24 @@ export const registerValidate = (user) => {
   };
 
   if (!name) {
-    errors.push({ field: "name", message: "Name is required" });
+    return "Name is required";
   } else if (name.length > MAX_NAME_LENGTH) {
-    errors.push({
-      field: "name",
-      message: `Name must be less than ${MAX_NAME_LENGTH} characters`,
-    });
+    return `Name must be less than ${MAX_NAME_LENGTH} characters`;
   }
 
   if (!email) {
-    errors.push({ field: "email", message: "Email is required" });
+    return "Email is required";
   } else if (!EMAIL_REGEX.test(email)) {
-    errors.push({ field: "email", message: "A valid email is required" });
+    return "A valid email is required";
   }
 
-  const passwordError = passwordValidate(password, confirmPassword);
-
-  if (passwordError.length) {
-    errors.push(...passwordError);
+  if (!password) {
+    return "Password is required";
+  } else if (!PASSWORD_REGEX.test(password)) {
+    return `Password must be ${MIN_PASSWORD_LENGTH}-${MAX_PASSWORD_LENGTH} characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character`;
   }
 
-  return errors;
-};
+  if (password !== confirmPassword) {
+    return "Password and confirm password do not match";
+  }
+}
