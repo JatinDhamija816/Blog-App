@@ -23,7 +23,7 @@ app.use(
   })
 );
 app.use(express.static("public"));
-app.use(cookieParser);
+app.use(cookieParser());
 
 app.use("/api/v1/users", userRouter);
 

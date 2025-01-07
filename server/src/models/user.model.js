@@ -1,16 +1,11 @@
 import { Schema, model } from "mongoose";
-import {
-  comparePassword,
-  generateToken,
-  hashPassword,
-} from "../utils/authUtils";
+import { generateToken } from "../utils/authUtils.js";
 
 const userSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       trim: true,
     },
@@ -30,13 +25,13 @@ const userSchema = new Schema(
       trim: true,
       index: true,
     },
+    password: {
+      type: String,
+      required: true,
+    },
     bio: {
       type: String,
       trim: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Password is required"],
     },
     avatar: {
       type: String,
@@ -53,19 +48,15 @@ const userSchema = new Schema(
         ref: "Blog",
       },
     ],
+    likeBlogs: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Blog",
+      },
+    ],
   },
   { timestamps: true }
 );
-
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await hashPassword(this.password, 10);
-  next();
-});
-
-userSchema.methods.isPasswordCorrect = async function (password) {
-  return await comparePassword(password, this.password);
-};
 
 userSchema.methods.generateAccessToken = function () {
   return generateToken(
