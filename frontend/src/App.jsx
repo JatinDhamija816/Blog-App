@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import Welcome from "./components/Welcome";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import ProfileSetup from "./components/ProfileSetup";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" element={<Welcome />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile-setup" element={<ProfileSetup />} />
       </Routes>
     </div>
   );

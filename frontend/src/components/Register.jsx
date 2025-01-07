@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { register } from "../../utils/api";
 import { registerValidate } from "../../utils/validations/register";
 import useShowToasts from "../../utils/hooks/showToast";
+import { register } from "../../utils/api/user";
 
 const Register = () => {
   const navigate = useNavigate();
