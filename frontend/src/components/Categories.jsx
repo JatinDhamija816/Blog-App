@@ -11,9 +11,7 @@ const Categories = () => {
 
   return (
     <div>
-      <h2 className="hidden md:flex text-xl font-bold mb-4 text-center md:w-full items-center justify-center">
-        Categories
-      </h2>
+      <h2 className="users-and-category-Heading">Categories</h2>
       <div className="w-full overflow-x-auto md:overflow-x-hidden custom-scrollbar">
         <ul className="flex md:flex-col items-center py-1 whitespace-nowrap">
           {categories.map((category, index) => (
