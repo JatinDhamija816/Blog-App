@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { registerValidate } from "../../utils/validations/register";
 import useShowToasts from "../../utils/hooks/showToast";
 import { register } from "../../utils/api/user";
+import registerValidate from "../../utils/validations/register";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -27,27 +27,30 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const validateUser = registerValidate(user);
 
-    if (validateUser.length > 0) {
-      showToast(validateUser[0].message);
+    const errorMessage = registerValidate(user);
+    if (errorMessage) {
+      showToast(errorMessage);
       setLoading(false);
-    } else {
-      try {
-        const res = await register(user);
-        if (res.success) {
-          navigate("/profileSetup", {
-            state: { username: res.username, name: user.name },
-          });
-        } else {
-          showToast(res.message);
-        }
-      } catch (error) {
-        console.error(error);
-        showToast("An error occurred. Please try again.");
-      } finally {
-        setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await register(user);
+
+      if (res?.success) {
+        showToast("Registration successful!", false);
+        navigate("/profile-setup", {
+          state: { username: res.data.username, name: res.data.name },
+        });
+      } else {
+        showToast(res?.message || "An error occurred. Please try again.");
       }
+    } catch (error) {
+      console.error("Unexpected Error:", error);
+      showToast("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
