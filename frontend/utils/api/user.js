@@ -27,3 +27,17 @@ export const login = async (identifier, password) => {
     return error;
   }
 };
+
+export const profileSetup = async (formData) => {
+  try {
+    const res = await axios.patch(
+      `${SERVER_URL}/users/profile-setup`,
+      formData,
+      { withCredentials: true }
+    );
+
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
