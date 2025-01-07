@@ -83,9 +83,7 @@ const ProfileSetup = () => {
 
   return (
     <div className="min-h-screen p-8">
-      <p className="text-center font-mono italic text-2xl font-bold md:text-left">
-        WordFlow
-      </p>
+      <p className="logo md:text-left">WordFlow</p>
 
       <div className="my-5 mx-auto max-w-screen-sm flex flex-col items-start">
         <div>

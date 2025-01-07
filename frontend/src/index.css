@@ -25,3 +25,15 @@
 .signIn-signUp {
   @apply text-blue-500 hover:text-blue-700 hover:underline cursor-pointer;
 }
+
+.logo{
+  @apply font-mono italic text-2xl font-bold cursor-pointer transition
+}
+
+.desktop-profile-modal {
+  @apply hover:bg-cyan-500 hover:text-white font-semibold p-3 transition cursor-pointer
+}
+
+.mobile-profile-modal {
+  @apply font-semibold text-center cursor-pointer hover:bg-cyan-500 rounded-md px-3 py-2 transition hover:text-white
+}
