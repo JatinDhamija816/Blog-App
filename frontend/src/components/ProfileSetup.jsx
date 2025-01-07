@@ -118,7 +118,7 @@ const ProfileSetup = () => {
             ) : (
               <label
                 htmlFor="avatar"
-                className="p-12 md:p-16 border border-dashed rounded-full w-fit cursor-pointer transition duration-300"
+                className="p-12 md:p-16 border border-black border-dashed rounded-full w-fit cursor-pointer transition duration-300"
               >
                 <FaCamera className="" />
                 <input
