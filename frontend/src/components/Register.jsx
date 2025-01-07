@@ -7,17 +7,17 @@ import useShowToasts from "../../utils/hooks/showToast";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { showToast } = useShowToasts();
+
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { showToast } = useShowToasts();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +43,7 @@ const Register = () => {
           showToast(res.message);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         showToast("An error occurred. Please try again.");
       } finally {
         setLoading(false);
@@ -53,9 +53,9 @@ const Register = () => {
 
   return (
     <div className=" h-screen flex justify-between">
-      <div className="px-8 py-10 flex-1 flex items-center justify-center">
-        <div className="px-8 py-10 md:shadow-2xl shadow-black  rounded-lg md:max-w-sm w-full">
-          <p className="form-heading">Sign up to textTides</p>
+      <div className="px-8 py-5 flex-1 flex items-center justify-center">
+        <div className="px-8 py-5 md:shadow-2xl shadow-black  rounded-lg md:max-w-sm w-full">
+          <p className="form-heading">Sign up to WordFlow</p>
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
               <label htmlFor="name" className="label">
@@ -68,6 +68,7 @@ const Register = () => {
                 className="input"
                 value={user.name}
                 onChange={handleChange}
+                placeholder="John Doe"
               />
             </div>
 
@@ -82,6 +83,7 @@ const Register = () => {
                 className="input"
                 value={user.email}
                 onChange={handleChange}
+                placeholder="johndoe@gmail.com"
               />
             </div>
 
@@ -96,6 +98,7 @@ const Register = () => {
                 className="input"
                 value={user.password}
                 onChange={handleChange}
+                placeholder="Ab123456@"
               />
               <div
                 className="eye-btn"
@@ -120,6 +123,7 @@ const Register = () => {
                 className="input"
                 value={user.confirmPassword}
                 onChange={handleChange}
+                placeholder="Ab123456@"
               />
               <div
                 className="eye-btn"
@@ -144,9 +148,7 @@ const Register = () => {
             <p className="text-center pt-5">
               Already have an account?{" "}
               <Link to="/login">
-                <span className="text-blue-500 hover:text-blue-700 hover:underline cursor-pointer">
-                  Sign In
-                </span>
+                <span className="signIn-signUp">Sign In</span>
               </Link>
             </p>
           </div>
