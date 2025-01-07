@@ -13,3 +13,17 @@ export const register = async (userData) => {
     return error;
   }
 };
+
+export const login = async (identifier, password) => {
+  try {
+    const res = await axios.post(
+      `${SERVER_URL}/users/login`,
+      { identifier, password },
+      { withCredentials: true }
+    );
+
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};

@@ -3,21 +3,25 @@
 @tailwind utilities;
 
 .label {
-    @apply block font-medium mb-2
+  @apply block font-medium mb-2;
 }
 
 .input {
-    @apply border px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full
+  @apply border px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full;
 }
 
 .eye-btn {
-    @apply absolute right-3 top-9 cursor-pointer  hover:text-slate-800
+  @apply absolute right-3 top-9 cursor-pointer  hover:text-slate-800;
 }
 
 .submit-btn {
-    @apply border w-3/4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition duration-300
+  @apply border w-3/4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition duration-300;
 }
 
 .form-heading {
-    @apply text-2xl font-bold text-center mb-5 
+  @apply text-2xl font-bold text-center mb-5;
+}
+
+.signIn-signUp {
+  @apply text-blue-500 hover:text-blue-700 hover:underline cursor-pointer;
 }
