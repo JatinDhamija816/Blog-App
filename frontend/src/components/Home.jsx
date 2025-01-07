@@ -1,7 +1,7 @@
 import Categories from "./Categories";
 import Navbar from "./Navbar";
 import ShowBlogs from "./ShowBlogs";
-import ShowUsers from "./ShowUsers";
+import UsersList from "./UsersList";
 
 const Home = () => {
   // const { setUser, setIndividualBlog } = useAppContext();
@@ -33,8 +33,8 @@ const Home = () => {
           <ShowBlogs />
         </div>
 
-        <div className="hidden md:flex md:w-1/4 w-full rounded-lg md:p-5 p-2 mb-5 md:mb-0 h-fit border">
-          <ShowUsers />
+        <div className="hidden md:flex rounded-lg p-5  h-fit border">
+          <UsersList />
         </div>
       </div>
     </div>
