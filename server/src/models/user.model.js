@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { generateToken } from "../utils/authUtils.js";
 
 const userSchema = new Schema(
   {
@@ -29,6 +28,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    isProfileSetupComplete: {
+      type: Boolean,
+      default: false,
+    },
     bio: {
       type: String,
       trim: true,
@@ -57,22 +60,6 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
-userSchema.methods.generateAccessToken = function () {
-  return generateToken(
-    { _id: this._id, email: this.email },
-    process.env.ACCESS_TOKEN_SECRET,
-    process.env.ACCESS_TOKEN_EXPIRY
-  );
-};
-
-userSchema.methods.generateRefreshToken = function () {
-  return generateToken(
-    { _id: this._id },
-    process.env.REFRESH_TOKEN_SECRET,
-    process.env.REFRESH_TOKEN_EXPIRY
-  );
-};
 
 const User = model("User", userSchema);
 

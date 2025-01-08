@@ -9,6 +9,8 @@ import {
   EMAIL_REGEX,
   PASSWORD_REGEX,
 } from "../../config/constants.js";
+import { setAuthCookies } from "../../utils/cookies.utils.js";
+import { generateAuthTokens } from "../../utils/tokens.utils.js";
 
 const register = asyncHandler(async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
@@ -53,9 +55,29 @@ const register = asyncHandler(async (req, res) => {
     username,
   });
 
-  return res
-    .status(201)
-    .json(new ApiResponse(201, user, "User registered successfully"));
+  const { accessToken, refreshToken } = generateAuthTokens(
+    user._id,
+    user.email
+  );
+
+  setAuthCookies(
+    res,
+    accessToken,
+    refreshToken,
+    accessExpiresAt,
+    refreshExpiresAt
+  );
+
+  return res.status(201).json(
+    new ApiResponse(
+      201,
+      {
+        username: user?.username,
+        name: user?.name,
+      },
+      "User registered successfully"
+    )
+  );
 });
 
 export default register;
